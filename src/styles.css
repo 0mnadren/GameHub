@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Ranchers&family=Roboto:ital,wght@0,500;0,900;1,400&display=swap');
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background: url('./assets/img/liquid_colors.png') no-repeat center
+		center/cover;
+	height: 100vh;
+	font-family: 'Roboto', sans-serif;
+	font-size: 16px;
+	color: #333;
+}

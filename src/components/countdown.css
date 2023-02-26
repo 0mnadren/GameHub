@@ -1,0 +1,31 @@
+.countdown-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+}
+
+.countdown-container .countdown-cirle {
+	padding: 100px;
+	background-image: linear-gradient(to right, #fff, rgb(185, 180, 180));
+	border: 1px solid rgb(8, 199, 224);
+	border-radius: 50%;
+	animation: countdown-animation 1s ease-in-out forwards;
+}
+
+.countdown-cirle span {
+	font-size: 40px;
+	color: rgb(8, 199, 224);
+}
+
+@keyframes countdown-animation {
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.5);
+	}
+	100% {
+		transform: scale(1);
+	}
+}

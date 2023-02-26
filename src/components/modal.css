@@ -1,0 +1,28 @@
+.overlay {
+	position: absolute;
+	height: 100vh;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-container {
+	z-index: 5;
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 90px;
+	background-image: linear-gradient(to right, #fff, rgb(185, 180, 180));
+	border-radius: 25px;
+	gap: 20px;
+}
+.modal-container input {
+	width: 100%;
+	text-align: center;
+	padding: 20px;
+	font-size: large;
+}
+.modal-container input::placeholder {
+	color: rgba(0, 0, 0, 0.3);
+}

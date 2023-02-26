@@ -1,0 +1,57 @@
+.gameover-container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+}
+
+.gameover-container section {
+	display: flex;
+	flex-direction: row;
+	padding: 80px;
+	background-image: linear-gradient(to right, #fff, rgb(185, 180, 180));
+	border: 1px solid rgb(8, 199, 224);
+	border-radius: 50px;
+	font-size: larger;
+	color: #333;
+	gap: 50px;
+}
+
+.gameover-section-results {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+.buttons-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+}
+.buttons-container span {
+	font-weight: bold;
+	padding-bottom: 10px;
+}
+.buttons-container div {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
+
+.btn {
+	color: #333;
+	text-decoration: none;
+}
+.btn:hover {
+	color: #000;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.buttons-container div .action-btn {
+	padding: 10px 20px;
+}

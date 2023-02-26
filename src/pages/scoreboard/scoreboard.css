@@ -1,0 +1,40 @@
+.scoreboard-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+}
+
+.scoreboard-container main {
+	display: flex;
+	height: 80vh;
+	width: 60%;
+	flex-direction: column;
+	padding: 80px;
+	background-image: linear-gradient(to right, #fff, rgb(185, 180, 180));
+	border: 1px solid rgb(8, 199, 224);
+	border-radius: 50px;
+	font-size: larger;
+	color: #333;
+	text-align: center;
+}
+
+.scoreboard-container main h1 {
+	padding-bottom: 40px;
+}
+
+.scoreboard {
+	display: flex;
+	border-bottom: 1px solid rgb(8, 199, 224);
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.scoreboard div {
+	margin: 0 auto;
+}
+
+.scoreboard span {
+	color: rgb(8, 199, 224);
+}
