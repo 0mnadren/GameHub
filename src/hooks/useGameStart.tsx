@@ -33,5 +33,12 @@ export default function useGameStart({
 		}
 	}, [isGameStarted, gameTimer]);
 
-	return { gameTimer, isGameStarted, setIsGameStarted, gameOver, setGameOver };
+	return {
+		gameTimer,
+		setGameTimer,
+		isGameStarted,
+		setIsGameStarted,
+		gameOver,
+		setGameOver,
+	};
 }

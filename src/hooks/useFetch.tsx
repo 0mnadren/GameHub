@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import JSONJokes from '../data/jokes.json';
 
 interface JokeInterface {
 	setup: string;
@@ -10,10 +11,10 @@ export default function useFetch(url: string) {
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [error, setError] = useState(null);
 
-	useEffect(() => {
+	const fetchData = useCallback(async () => {
+		console.log('Data fetching ...');
 		const abortController = new AbortController();
 		const signal = abortController.signal;
-		console.log('data fetching ...');
 		fetch(url, {
 			signal,
 		})
@@ -34,6 +35,7 @@ export default function useFetch(url: string) {
 						.replace('’', "'")
 						.replace('💘', '<3')
 						.replace('ñ', 'n')
+						.replace('“', '"')
 				);
 				setIsLoading(false);
 			})
@@ -42,10 +44,24 @@ export default function useFetch(url: string) {
 					console.log('Request was cancelled');
 				} else {
 					setError(error);
+					console.log(error);
 				}
 				setIsLoading(false);
+				const jokesArray = JSONJokes.jokes.map(
+					({ setup, punchline }: JokeInterface) => `${setup} ${punchline}`
+				);
+				setFetchedJokes(jokesArray.join(' '));
 			});
+
+		return () => {
+			console.log('Canceling request ...');
+			abortController.abort();
+		};
 	}, []);
 
-	return { fetchedJokes, isLoading, error };
+	useEffect(() => {
+		fetchData();
+	}, [fetchData]);
+
+	return { fetchedJokes, setFetchedJokes, fetchData, isLoading, error };
 }

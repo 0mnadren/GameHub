@@ -1,26 +1,30 @@
 import { Link } from 'react-router-dom';
 import './home.css';
-import correctImg from '../../assets/img/correct_image.jpg';
-import wrongImg from '../../assets/img/wrong_image.jpg';
 
 function Home() {
 	return (
 		<div className="home-container">
 			<main>
-				<h1>Welcome to ColorSpeeder</h1>
-				<h2>How to play it</h2>
-				<p>Hello and welcome to ColorSpeeder</p>
-				<div className="img-container">
-					<img src={correctImg} alt="Correct answered example" />
-					<img src={wrongImg} alt="Wrong answered example" />
-				</div>
-				<h3>Good Luck & Have Fun</h3>
+				<h1>Welcome to GameHub</h1>
+				<p>
+					The GameHub is a place where I tinker with FrontEnd technologies and
+					build games
+				</p>
+				<p>
+					I have had a lot of fun experimenting and creating these games, I hope
+					you will have a great time playing them
+				</p>
+				<p>
+					If you are interested to find more about me and my work visit the{' '}
+					<Link to="/about">About</Link> section.
+				</p>
+				<h2>Enjoy the games!</h2>
 				<div className="button-container">
 					<Link className="link" to="color-game">
-						Play ColorGame
+						ColorGame
 					</Link>
 					<Link className="link" to="typer">
-						Play TyperGame
+						TyperGame
 					</Link>
 				</div>
 			</main>

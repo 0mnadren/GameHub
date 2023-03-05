@@ -99,3 +99,18 @@ textarea:focus-visible {
 	border-radius: 25px;
 	background-color: #f5f5f5;
 }
+
+.error-fetch {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	font-size: 4rem;
+	font-weight: bold;
+	color: rgb(8, 199, 224);
+}
+.error-fetch h1 {
+	padding: 20px;
+	border-radius: 25px;
+	background-color: #f5f5f5;
+}

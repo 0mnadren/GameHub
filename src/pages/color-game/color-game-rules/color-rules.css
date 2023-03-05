@@ -1,10 +1,10 @@
-.home-container {
+.colorgame-rules-container {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	height: 100vh;
 }
-.home-container main {
+.colorgame-rules-container main {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -16,47 +16,42 @@
 	width: 60%;
 }
 
-.home-container h1 {
+.colorgame-rules-container h1 {
 	font-family: 'Ranchers', cursive;
-	background: linear-gradient(
-		to right,
-		red,
-		orange,
-		yellow,
-		green,
-		blue,
-		indigo,
-		violet
-	);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
 	font-size: 4rem;
 	font-weight: bold;
 	text-shadow: black;
 	letter-spacing: 0.2rem;
 	padding-bottom: 30px;
 }
-.home-container h2 {
+.colorgame-rules-container h2 {
 	font-size: 2rem;
 	padding-bottom: 30px;
 }
-.home-container p {
+.colorgame-rules-container p {
 	padding-bottom: 30px;
 }
 
-.home-container p a {
-	text-decoration: none;
-	font-weight: bold;
-	color: #333;
+.img-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: row;
+	padding-bottom: 30px;
+	gap: 50px;
+}
+.img-container img {
+	width: 400px;
 }
 
-.home-container p a:hover {
-	text-decoration: underline;
+.colorgame-rules-container h3 {
+	padding-bottom: 20px;
 }
 
 .link {
 	padding: 20px;
 	background-color: aliceblue;
+	/*color: rgb(228, 43, 43); */
 	color: steelblue;
 	text-decoration: none;
 	border-color: rgb(8, 199, 224);

@@ -1,14 +1,26 @@
 import { Link } from 'react-router-dom';
-import Home from '../pages/home/Home';
 import './navbar.css';
 
-function Navbar() {
+interface NavbarInterface {
+	hasScoreBoard?: boolean;
+	rulesURL?: string;
+	hardMode?: boolean;
+}
+
+function Navbar({
+	hasScoreBoard = false,
+	rulesURL,
+	hardMode,
+}: NavbarInterface) {
 	return (
 		<nav>
 			<ul>
 				<Link to={'/'}>Home</Link>
-				<Link to={'/score-board'}>Score Board</Link>
-				<Link to={'/contacts'}>Contacts</Link>
+				{hasScoreBoard && <Link to={'/score-board'}>Score Board</Link>}
+				{rulesURL && <Link to={rulesURL}>Rules</Link>}
+				{hardMode === true && <Link to={`/typer?hard=${true}`}>Hard Mode</Link>}
+				{hardMode === false && <Link to={`/typer`}>Normal Mode</Link>}
+				<Link to={'/about'}>About</Link>
 			</ul>
 		</nav>
 	);

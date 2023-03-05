@@ -1,0 +1,37 @@
+.about-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+}
+
+.about-container main {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	padding: 80px;
+	background-image: linear-gradient(to right, #fff, rgb(185, 180, 180));
+	border: 3px solid rgb(8, 199, 224);
+	border-radius: 5%;
+	height: 60%;
+	width: 60%;
+}
+
+.about-container h1 {
+	padding-bottom: 30px;
+}
+
+.about-container p {
+	font-size: larger;
+	padding: 10px 0;
+}
+
+.about-container p a {
+	text-decoration: none;
+	font-weight: bold;
+	color: rgb(8, 199, 224);
+}
+
+.about-container p a:hover {
+	text-decoration: underline;
+}

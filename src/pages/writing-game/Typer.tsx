@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import CountdownAnimation from '../../components/CountdownAnimation';
 import GameOver from '../../components/GameOver';
 import Navbar from '../../components/Navbar';
@@ -6,18 +8,21 @@ import ProgressBar from '../../components/ProgressBar';
 import {
 	CORRECT_TEXT_BACKGROUND_COLOR,
 	INCORRECT_TEXT_BACKGROUND_COLOR,
+	INITIAL_TIMER_VALUE,
 } from '../../data/constants';
 import useFetch from '../../hooks/useFetch';
 import useGameStart from '../../hooks/useGameStart';
 import './typer.css';
 
 function Typer() {
-	const { fetchedJokes, isLoading, error } = useFetch(
-		'https://official-joke-api.appspot.com/jokes/ten'
-	);
+	const { fetchedJokes, setFetchedJokes, fetchData, isLoading, error } =
+		useFetch('https://official-joke-api.appspot.com/jokes/ten');
 	const [userTypedValue, setUserTypedValue] = useState<string>('');
+	const [hardMode, setHardMode] = useState(false);
+
 	const prevLastCorrectIndexRef = useRef<number | undefined>(undefined);
 	const textareaRef = useRef<HTMLTextAreaElement>(null);
+	const location = useLocation();
 
 	const lastIndexOfUserTypedValue = userTypedValue
 		? userTypedValue.length - 1
@@ -46,8 +51,14 @@ function Typer() {
 	} else {
 		correctTypedText = fetchedJokes.slice(0, prevLastCorrectIndexRef.current);
 	}
-	const { gameTimer, isGameStarted, setIsGameStarted, gameOver, setGameOver } =
-		useGameStart({ correctTypedText, fetchedJokes });
+	const {
+		gameTimer,
+		setGameTimer,
+		isGameStarted,
+		setIsGameStarted,
+		gameOver,
+		setGameOver,
+	} = useGameStart({ correctTypedText, fetchedJokes });
 
 	const lastIncorrectIndex =
 		userTypedValue !== fetchedJokes.slice(0, sliceIndexEndForTypedValue)
@@ -92,6 +103,18 @@ function Typer() {
 		textareaRef.current && textareaRef.current.focus();
 	}, [isGameStarted]);
 
+	useEffect(() => {
+		if (location.search.includes('hard=true')) {
+			setHardMode(true);
+		} else {
+			setHardMode(false);
+		}
+		// const queryParams = new URLSearchParams(location.search);
+		// const queryParam = queryParams.get('hard');
+		// console.log('queryParam is here!!!', queryParam);
+		// queryParam &&
+	}, [location]);
+
 	function startCountdown() {
 		setIsGameStarted(true);
 	}
@@ -116,6 +139,15 @@ function Typer() {
 		return 0;
 	}
 
+	function hadnleResetGame() {
+		setGameOver(false);
+		setIsGameStarted(false);
+		setGameTimer(INITIAL_TIMER_VALUE);
+		setFetchedJokes('');
+		fetchData();
+		setUserTypedValue('');
+	}
+
 	if (isLoading)
 		return (
 			<div className="loading">
@@ -125,9 +157,11 @@ function Typer() {
 	if (error) {
 		console.log(error);
 		return (
-			<h1>
-				Oops something happended, please try reloading, or come back later...
-			</h1>
+			<div className="error-fetch">
+				<h1>
+					Oops something happended, please try reloading, or come back later...
+				</h1>
+			</div>
 		);
 	}
 	console.log(gameOver);
@@ -138,17 +172,86 @@ function Typer() {
 				getPercentage={getPercentage}
 				getWordsPerSecond={getWordsPerSecond}
 				getWordsPerMinute={getWordsPerMinute}
+				hadnleResetGame={hadnleResetGame}
 			/>
 		);
 	}
-	//TODO: Make text of text-container not selectable, so that user can't copy the text and cheat!!!
+
+	/*
+		If user chooses the HARD MODE
+	*/
+	if (hardMode) {
+		return (
+			<div className="typer-conatiner">
+				{!isGameStarted ? (
+					<CountdownAnimation startCountdown={startCountdown} />
+				) : (
+					<motion.main
+						animate={{ scale: [0.9, 1.1, 0.9] }}
+						transition={{ type: 'tween', duration: 5, repeat: Infinity }}
+					>
+						<Navbar hardMode={false} />
+						<motion.h1
+							animate={{ rotate: [0, 360] }}
+							transition={{ type: 'tween', duration: 3, repeat: Infinity }}
+						>
+							Typer
+						</motion.h1>
+						<div className="container">
+							<motion.div
+								animate={{ x: [-50, 50, -50] }}
+								transition={{ type: 'tween', duration: 4, repeat: Infinity }}
+								className="text-container"
+							>
+								{correctTypedText && (
+									<span
+										style={{ backgroundColor: CORRECT_TEXT_BACKGROUND_COLOR }}
+									>
+										{correctTypedText}
+									</span>
+								)}
+								{incorrectTypedText && (
+									<span
+										style={{ backgroundColor: INCORRECT_TEXT_BACKGROUND_COLOR }}
+									>
+										{incorrectTypedText}
+									</span>
+								)}
+								{restOfText && <span>{restOfText}</span>}
+							</motion.div>
+
+							<div className="timer-container">Timer: {gameTimer}</div>
+
+							<ProgressBar
+								correctTypedTextLength={
+									correctTypedText ? correctTypedText.length : null
+								}
+								jokesLettersLength={fetchedJokes.length}
+							/>
+
+							<motion.textarea
+								animate={{ x: [50, -50, 50] }}
+								transition={{ type: 'tween', duration: 2, repeat: Infinity }}
+								ref={textareaRef}
+								onChange={e => setUserTypedValue(e.target.value)}
+							></motion.textarea>
+						</div>
+					</motion.main>
+				)}
+			</div>
+		);
+	}
+
+	/*
+		NORMAL MODE
+	*/
 	return (
 		<div className="typer-conatiner">
 			{!isGameStarted ? (
 				<CountdownAnimation startCountdown={startCountdown} />
 			) : (
 				<main>
-					<Navbar />
+					<Navbar hardMode={true} />
 					<h1>Typer</h1>
 					<div className="container">
 						<div className="text-container">

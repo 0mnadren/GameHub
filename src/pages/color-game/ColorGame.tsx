@@ -136,7 +136,7 @@ function ColorGame() {
 					backgroundImage: phase2 ? 'none' : undefined,
 				}}
 			>
-				<Navbar />
+				<Navbar hasScoreBoard={true} rulesURL={'/color-game-rules'} />
 				<h1 style={{ color: phase1 ? makeRandomColor() : undefined }}>
 					ColorGame
 				</h1>
@@ -185,7 +185,7 @@ function ColorGame() {
 					</button>
 				) : (
 					<button className="action-btn" onClick={handleGameStart}>
-						Play
+						GO
 					</button>
 				)}
 

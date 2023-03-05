@@ -6,6 +6,7 @@ interface GameOverInterface {
 	getPercentage: () => string | 0;
 	getWordsPerSecond: () => string | 0;
 	getWordsPerMinute: () => string | 0;
+	hadnleResetGame: () => void;
 }
 
 function GameOver({
@@ -13,6 +14,7 @@ function GameOver({
 	getPercentage,
 	getWordsPerSecond,
 	getWordsPerMinute,
+	hadnleResetGame,
 }: GameOverInterface) {
 	return (
 		<div className="gameover-container">
@@ -29,13 +31,14 @@ function GameOver({
 
 				<div className="buttons-container">
 					<span>Thanks for playing!</span>
+					<span> Don't forget to take a Screenshot before you leave!</span>
 					<div>
 						<Link to="/" className="btn">
 							Home
 						</Link>{' '}
-						<Link to="/typer" className="action-btn">
+						<button onClick={() => hadnleResetGame()} className="action-btn">
 							Play again
-						</Link>
+						</button>
 					</div>
 				</div>
 			</section>
